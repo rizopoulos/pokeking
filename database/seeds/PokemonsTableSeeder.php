@@ -51,6 +51,7 @@ class PokemonsTableSeeder extends Seeder {
 
 			// insert pokemon data
 			DB::table( $this->name )->insert( [
+				'id'         => (int) str_replace( $this->endpoint, '', $pokemon->url ),
 				'name'       => $pokemon->name,
 				'url'        => $pokemon->url,
 				'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
