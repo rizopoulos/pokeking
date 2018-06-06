@@ -20,19 +20,37 @@ const app = new Vue({
 	el: '#app',
 	data() {
 		return {
+			/**
+			 * If a AJAX reqeust is running this will be true.
+			 * We need to make sure the multiple ajax requests
+			 * are fired vie click event of FIND THE KING button
+			 */
 			doingRequest: false,
+			/**
+			 * Stores the king data
+			 */
 			king: null
 		}
 	},
 	computed: {
+		/**
+		 * We need to show the FIND THE KING button only if Pokemon King is not found
+		 * @returns {boolean}
+		 */
 		showFindKingButton() {
 			return this.king === null;
 		}
 	},
 	methods: {
+		/**
+		 * Click event handler to hide the SHOW THE KING button
+		 */
 		hideKing() {
 			this.king = null;
 		},
+		/**
+		 * click event handler to find the pokemon king
+		 */
 		findKing() {
 			if (this.doingRequest) {
 				return;
