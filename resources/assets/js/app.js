@@ -20,18 +20,29 @@ const app = new Vue({
 	el: '#app',
 	data() {
 		return {
-			doingRequest: false
+			doingRequest: false,
+			king: null
+		}
+	},
+	computed: {
+		showFindKingButton() {
+			return this.king === null;
 		}
 	},
 	methods: {
+		hideKing() {
+			this.king = null;
+		},
 		findKing() {
 			if (this.doingRequest) {
 				return;
 			}
 			this.doingRequest = true;
+			this.king = null;
 
-			axios.get('/api/pokemons/king').then(() => {
+			axios.get('/api/pokemons/king').then((res) => {
 				this.doingRequest = false;
+				this.king = res.data;
 			});
 		}
 	}

@@ -1,0 +1,22 @@
+.king {
+	width: 400px;
+	margin: 30px auto;
+	position: relative;
+
+	.thumbnail {
+		padding: 30px;
+	}
+
+	&__close {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		cursor: pointer;
+		padding: 10px;
+		color: $brand-danger;
+	}
+
+	&__info {
+		cursor: pointer;
+	}
+}
