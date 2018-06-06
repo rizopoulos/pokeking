@@ -32,7 +32,7 @@
                     </li>
                 </ul>
                 <div class="king__close" title="Hide King details" @click="$root.hideKing">
-                    <i class="glyphicon glyphicon-remove"></i>
+                    &times;
                 </div>
                 <p class="text-right king__info"
                    @click="$root.hideKing">
