@@ -21,7 +21,7 @@ class CreatePokemonProfiles extends Migration {
 		if ( ! Schema::hasTable( $this->name ) ) {
 			Schema::create( $this->name, function ( Blueprint $table ) {
 				$table->increments( 'id' );
-				$table->integer( 'pokemons_id' )->index();
+				$table->integer( 'pokemon_id' )->index();
 				$table->string( 'sprite' );
 				$table->integer( 'base_experience' );
 				$table->integer( 'height' );

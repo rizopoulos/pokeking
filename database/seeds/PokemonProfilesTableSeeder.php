@@ -39,12 +39,12 @@ class PokemonProfilesTableSeeder extends Seeder {
 					$data = json_decode( $response->getBody() );
 					if ( $data->height >= 50 && ( ! empty( $data->sprites->front_default ) ) ) {
 						// if pokemon already exists don't insert
-						if ( DB::table( 'pokemon_profiles' )->where( 'pokemons_id', $data->id )->exists() ) {
+						if ( DB::table( 'pokemon_profiles' )->where( 'pokemon_id', $data->id )->exists() ) {
 							return;
 						}
 						echo "Ready to insert response $index \n";
 						$record = [
-							'pokemons_id'     => $data->id,
+							'pokemon_id'      => $data->id,
 							'sprite'          => $data->sprites->front_default,
 							'base_experience' => $data->base_experience,
 							'height'          => $data->height,
@@ -66,37 +66,5 @@ class PokemonProfilesTableSeeder extends Seeder {
 
 		// Force the pool of requests to complete.
 		$promise->wait( false );
-
-		/*
-		$records = $promises = [];
-		foreach ( $pokemons as $index => $pokemon ) {
-			$promises[ $pokemon->name ] = $client->getAsync( $pokemon->url, [
-				'verify' => false,
-			] );
-		}
-		$results = GuzzlePromise\settle( $promises )->wait();
-
-		foreach ( $results as $name => $result ) {
-			if ( $result['state'] === 'fulfilled' ) {
-				$response = $result['value'];
-				if ( $response->getStatusCode() == 200 ) {
-					$data = json_decode( $response->getBody() );
-					if ( $data->height >= 50 && ( ! empty( $data->sprites->front_default ) ) ) {
-						$record = [
-							'pokemons_id'     => $data->id,
-							'sprite'          => $data->sprites->front_default,
-							'base_experience' => $data->base_experience,
-							'height'          => $data->height,
-							'weight'          => $data->weight,
-							'info'            => json_encode( $data, JSON_UNESCAPED_UNICODE ),
-							'created_at'      => \Carbon\Carbon::now()->toDateTimeString(),
-						];
-						DB::table( 'pokemon_profiles' )->insert( $record );
-					}
-				}
-			}
-		}
-		// }
-	*/
 	}
 }
